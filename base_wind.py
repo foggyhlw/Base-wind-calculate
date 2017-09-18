@@ -1,8 +1,8 @@
 import math
-import pandas as pd
-import numpy as np
+#import pandas as pd
+#import numpy as np
 from pandas.io.parsers import read_csv
-from pandas import read_excel
+from pandas import read_excel,DataFrame
 #T为15,30,50年一遇年份
 T=30
 #自记与定时风速换算,手册P169,表3-1-7
@@ -54,10 +54,10 @@ for i in range(column_num):
 
 output={'年份':year ,'自记最大风速':continuous_wind ,'定时最大风速':discontinuous_wind}
 
-new_df=pd.DataFrame(output,columns=['年份','自记最大风速','定时最大风速'])
+new_df=DataFrame(output,columns=['年份','自记最大风速','定时最大风速'])
 new_df.to_csv('output.csv')
 for T in [15,30,50]:
     reference_wind=wind_speed_max(continuous_wind,T)
     rwname='统计{0}年一遇最大风速'.format(T)
-    new_line=pd.DataFrame([rwname,reference_wind])
+    new_line=DataFrame([rwname,reference_wind])
     new_line.to_csv('output.csv',mode='a',header=False,index=False)
